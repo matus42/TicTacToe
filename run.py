@@ -20,6 +20,9 @@ class TicTacToe:
             
             
     def check_winner(self, char):
+        """
+        Check for a winning condition for 'char' in game.
+        """
         for i in range(0, 9, 3):
             if self.board[i] == self.board[i + 1] == self.board[i + 2] == char:
                 return True
@@ -30,7 +33,44 @@ class TicTacToe:
             return True
         if self.board[2] == self.board[4] == self.board[6] == char:
             return True
-        return False               
+        return False
+    
+    
+    def play_game(self):
+        """
+        Main game loop that brings all the functionalities togethe.
+        """
+        player = Player()
+        computer = Computer()
+        while True:
+            self.print_board()
+            player.make_move(self.board)
+            
+            if self.check_winner('X'):
+                self.print_board()
+                print("Player wins!")
+                break
+        
+            if ' ' not in self.board:
+                self.print_board()
+                print("It's draw!")
+                break
+        
+            computer.make_move(self.board)
+            print("Computer made its move.")
+        
+            if self.check_winner('O'):
+                self.print_board()
+                print("Computer wins!")
+                break
+        
+            if ' ' not in self.board:
+                self.print_board()
+                print("It's a draw!")
+                break        
+            
+            
+                   
             
 class Player:
     """Handles player actions."""
@@ -60,25 +100,6 @@ class Computer:
 
 if __name__ == "__main__":
     game = TicTacToe()
-    
-    game.board = ['X', 'X', 'X', ' ', ' ', ' ', ' ', ' ', ' ']
-    
-    print("Board for X:")
-    game.print_board()
-    
-    if game.check_winner('X'):
-        print("X is a winner!")
-    else:
-        print("something went wrong")
-        
-    # Set up a winning board manually for O
-    game.board = ['O', ' ', ' ', 'O', ' ', ' ', 'O', ' ', ' ']
-    print("\nBoard for O:")
-    game.print_board() 
-    
-    if game.check_winner('O'):
-        print("O is a winner!")
-    else:
-        print("Something went wrong")       
+    game.play_game()      
     
     
