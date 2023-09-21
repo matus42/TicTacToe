@@ -18,6 +18,20 @@ class TicTacToe:
         for i in range (0, 9, 3):
             print(f"{self.board[i]} | {self.board[i + 1]} | {self.board[i + 2]}")
             
+            
+    def check_winner(self, char):
+        for i in range(0, 9, 3):
+            if self.board[i] == self.board[i + 1] == self.board[i + 2] == char:
+                return True
+        for i in range(3):
+            if self.board[i] == self.board[i + 3] == self.board[i + 6] == char:
+                return True
+        if self.board[0] == self.board[4] == self.board[8] == char:
+            return True
+        if self.board[2] == self.board[4] == self.board[6] == char:
+            return True
+        return False               
+            
 class Player:
     """Handles player actions."""
     def make_move(self, board):
@@ -46,21 +60,25 @@ class Computer:
 
 if __name__ == "__main__":
     game = TicTacToe()
-    player = Player()
-    computer = Computer()
-    print("Initial board:")
+    
+    game.board = ['X', 'X', 'X', ' ', ' ', ' ', ' ', ' ', ' ']
+    
+    print("Board for X:")
     game.print_board()
     
-    #test player move
-    player.make_move(game.board)
-    print("Board after players move:")
-    game.print_board()
+    if game.check_winner('X'):
+        print("X is a winner!")
+    else:
+        print("something went wrong")
+        
+    # Set up a winning board manually for O
+    game.board = ['O', ' ', ' ', 'O', ' ', ' ', 'O', ' ', ' ']
+    print("\nBoard for O:")
+    game.print_board() 
     
-    #test computers make_move method
-    print("Computer's turn:")
-    computer.make_move(game.board)
-    
-    print("Board after computer's move:")
-    game.print_board()
+    if game.check_winner('O'):
+        print("O is a winner!")
+    else:
+        print("Something went wrong")       
     
     
