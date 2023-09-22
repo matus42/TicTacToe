@@ -36,6 +36,22 @@ class TicTacToe:
         return False
     
     
+    def check_draw(self):
+        if ' ' not in self.board:
+            self.print_board()
+            print("It's a draw!")
+            return True
+        return False
+    
+    def make_and_check_move(self, mover, symbol, win_message):
+        mover.make_move(self.board)
+        if self.check_winner(symbol):
+            self.print_board()
+            print(win_message)
+            return True
+        return False
+    
+    
     def play_game(self):
         """
         Main game loop that brings all the functionalities togethe.
@@ -44,32 +60,19 @@ class TicTacToe:
         computer = Computer()
         while True:
             self.print_board()
-            player.make_move(self.board)
             
-            if self.check_winner('X'):
-                self.print_board()
-                print("Player wins!")
+            if self.make_and_check_move(player, 'X', "Player wins!"):
                 break
-        
-            if ' ' not in self.board:
-                self.print_board()
-                print("It's draw!")
+            if self.check_draw():
                 break
-        
-            computer.make_move(self.board)
+                
             print("Computer made its move.")
         
-            if self.check_winner('O'):
-                self.print_board()
-                print("Computer wins!")
+            if self.make_and_check_move(computer, 'O', "Computer wins"):
                 break
-        
-            if ' ' not in self.board:
-                self.print_board()
-                print("It's a draw!")
-                break        
-            
-            
+            if self.check_draw():
+                break
+                         
                    
             
 class Player:
