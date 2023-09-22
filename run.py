@@ -10,6 +10,8 @@ class TicTacToe:
         Initialize an empty game board.
         """
         self.board = [' ' for _ in range(9)]
+        self.player_score = 0
+        self.computer_score = 0
         
     def print_board(self):
         """
@@ -51,6 +53,13 @@ class TicTacToe:
             return True
         return False
     
+    def update_score(self, winner):
+        if winner == 'Player':
+            self.player_score += 1
+        elif winner == 'Computer':
+            self.computer_score += 1
+                
+    
     
     def play_game(self):
         """
@@ -58,21 +67,28 @@ class TicTacToe:
         """
         player = Player()
         computer = Computer()
-        while True:
-            self.print_board()
-            
-            if self.make_and_check_move(player, 'X', "Player wins!"):
-                break
-            if self.check_draw():
-                break
-                
-            print("Computer made its move.")
         
-            if self.make_and_check_move(computer, 'O', "Computer wins"):
-                break
-            if self.check_draw():
-                break
-                         
+        while True:
+            self.board = [' ' for _ in range(9)]
+        
+            while True:
+                self.print_board()
+                
+                if self.make_and_check_move(player, 'X', "Player wins!"):
+                    self.update_score('Player')
+                    break
+                if self.check_draw():
+                    break
+                    
+                print("Computer made its move.")
+            
+                if self.make_and_check_move(computer, 'O', "Computer wins"):
+                    self.update_score('Computer')
+                    break
+                if self.check_draw():
+                    break
+            
+            print(f"Current Score: Player {self.player_score} - Computer {self.computer_score}")             
                    
             
 class Player:
