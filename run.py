@@ -15,6 +15,7 @@ class TicTacToe:
         
     
     def print_board(self):
+        """Prints the game board."""
         print("\033[1;32m        Tic-Tac-Toe  \033[0m")  # Adding a green color to the title
         print("\033[1;32m---------------------------\033[0m")
         for i in range(0, 9, 3):
@@ -101,13 +102,18 @@ class Player:
         Takes input for the next move and updates the board.
         """
         while True:
-            position = int(input("Your move! Choose a position (1-9): ")) - 1
-            if board[position] == ' ':
-                board[position] = 'X'
-                break
-            else:
-                print("Invalid move. Try again.") 
-                
+            try:
+                position = int(input("Your move! Choose a position (1-9): ")) - 1
+                if 0 <= position < 9:
+                    if board[position] == ' ':
+                        board[position] = 'X'
+                        break
+                    else:
+                        print("Invalid move. Try again.")
+                else:
+                    print("Invalid position. Choose a number between 1 and 9.")         
+            except ValueError:
+                print("Please enter a number between 1 and 9.")    
                 
 class Computer:
     """Handles computer actions"""
