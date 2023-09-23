@@ -1,6 +1,30 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 import random
 
+class WelcomeScreen:
+    @staticmethod
+    def display():
+        print("\033[94m" + """
+        
+  _______          ______               ______         
+ /_  __(_)____    /_  __/___ ______    /_  __/___  ___ 
+  / / / / ___/_____/ / / __ `/ ___/_____/ / / __ \/ _ \\
+ / / / / /__/_____/ / / /_/ / /__/_____/ / / /_/ /  __/
+/_/ /_/\___/     /_/  \__,_/\___/     /_/  \____/\___/ 
+                                                       
+      
+        """ + "\033[0m")
+        print("===================================")
+        print("     Welcome to Tic-Tac-Toe! \U0001F604")
+        print("===================================")
+        print("Here are the rules:")
+        print("1. The board has positions 1-9 starting from top-left and going row-wise.")
+        print("2. You are 'X' and the computer is 'O'.")
+        print("3. To win, get three of your marks in a row, column, or diagonal.")
+        print("4. Input your move as a number between 1 and 9 to place your mark.")
+        print("5. If the board fills up without a winner, it's a draw.")
+        print("===================================")
+
 class TicTacToe:
     """
     Manages the game board and flow.
@@ -43,6 +67,7 @@ class TicTacToe:
     
     
     def check_draw(self):
+        """Check for a draw"""
         if ' ' not in self.board:
             self.print_board()
             print("It's a draw!")
@@ -50,6 +75,7 @@ class TicTacToe:
         return False
     
     def make_and_check_move(self, mover, symbol, win_message):
+        """Make a move and check if it resulted in a win"""
         mover.make_move(self.board)
         if self.check_winner(symbol):
             self.print_board()
@@ -58,6 +84,7 @@ class TicTacToe:
         return False
     
     def update_score(self, winner):
+        """Update the score based on the winner."""
         if winner == 'Player':
             self.player_score += 1
         elif winner == 'Computer':
@@ -69,6 +96,7 @@ class TicTacToe:
         """
         Main game loop that brings all the functionalities togethe.
         """
+        
         player = Player()
         computer = Computer()
         
@@ -78,7 +106,7 @@ class TicTacToe:
             while True:
                 self.print_board()
                 
-                if self.make_and_check_move(player, 'X', "Player wins!"):
+                if self.make_and_check_move(player, 'X', "Player wins!\n"):
                     self.update_score('Player')
                     break
                 if self.check_draw():
@@ -127,6 +155,7 @@ class Computer:
                 
 
 if __name__ == "__main__":
+    WelcomeScreen.display()
     game = TicTacToe()
     game.play_game()      
     
