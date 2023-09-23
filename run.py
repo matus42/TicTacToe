@@ -13,13 +13,16 @@ class TicTacToe:
         self.player_score = 0
         self.computer_score = 0
         
+    
     def print_board(self):
-        """
-        Prints the current state of the game board.
-        """
-        for i in range (0, 9, 3):
-            print(f"{self.board[i]} | {self.board[i + 1]} | {self.board[i + 2]}")
-            
+        print("\033[1;32m        Tic-Tac-Toe  \033[0m")  # Adding a green color to the title
+        print("\033[1;32m---------------------------\033[0m")
+        for i in range(0, 9, 3):
+            print(f" {i+1} | {i+2} | {i+3}       {self.board[i]} | {self.board[i + 1]} | {self.board[i + 2]} ")
+            if i < 6:
+                print("---+---+---     ---+---+---")
+        print("\033[1;32m---------------------------\033[0m")
+        
             
     def check_winner(self, char):
         """
