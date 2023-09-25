@@ -35,13 +35,14 @@ class TicTacToe:
     """
     Manages the game board and flow.
     """
-    def __init__(self):
+    def __init__(self, difficulty):
         """
         Initialize an empty game board.
         """
         self.board = [' ' for _ in range(9)]
         self.player_score = 0
         self.computer_score = 0
+        self.difficulty = difficulty
         
     
     def print_board(self):
@@ -98,13 +99,14 @@ class TicTacToe:
                 
     
     
-    def play_game(self, difficulty):
+    def play_game(self):
         """
         Main game loop that brings all the functionalities togethe.
         """
         
         player = Player()
         computer = Computer(difficulty, self.check_winner)
+        game_count = 0
         
         while True:
             self.board = [' ' for _ in range(9)]
@@ -126,8 +128,34 @@ class TicTacToe:
                 if self.check_draw():
                     break
             
-            print(f"Current Score: Player {self.player_score} - Computer {self.computer_score}")             
-                   
+            print(f"Current Score: Player {self.player_score} - Computer {self.computer_score}")
+            
+            game_count += 1
+            if game_count == 2:
+                print("You've played 5 games!")
+                if self.difficulty == 'h':
+                    while True:
+                        choice = input("Do you want to keep playing? (y/n):").lower()
+                        if choice in ['y', 'n']:
+                            break
+                        print("Invalid input. Please choose 'y' or 'n'.")
+                    if choice == 'n':
+                        return # exit the game                  
+                else:
+                    while True:
+                        choice = input("Do you want to increase difficulty or exit? (i/e).")
+                        if choice in ['i', 'e']:
+                            break
+                        print("Invalid input. Please choose 'i'(increase) or 'e'(exit).")
+                    if choice == 'e':
+                        return # exit the game
+                    elif choice == 'i':
+                        if self.difficulty == 'e':
+                            self.difficulty = 'm'
+                        elif self.difficulty == 'm':
+                            self.difficulty = 'h' 
+                        computer = Computer(self.difficulty, self.check_winner)            
+                game_count = 0                      
             
 class Player:
     """Handles player actions."""
@@ -192,7 +220,7 @@ class Computer:
 
 if __name__ == "__main__":
     difficulty = WelcomeScreen.display()
-    game = TicTacToe()
-    game.play_game(difficulty)      
+    game = TicTacToe(difficulty)
+    game.play_game()      
     
     
