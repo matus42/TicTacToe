@@ -24,6 +24,12 @@ class WelcomeScreen:
         print("4. Input your move as a number between 1 and 9 to place your mark.")
         print("5. If the board fills up without a winner, it's a draw.")
         print("===================================")
+        
+        difficulty = input("Choose difficulty level - Easy (e), Medium (m), Hard (h): ").lower()
+        while difficulty not in ['e', 'm', 'h']:
+            print("Invalid option. Please choose again.")
+            difficulty = input("Choose difficulty level - Easy (e), Medium (m), Hard (h): ").lower()
+        return difficulty    
 
 class TicTacToe:
     """
@@ -92,13 +98,13 @@ class TicTacToe:
                 
     
     
-    def play_game(self):
+    def play_game(self, difficulty):
         """
         Main game loop that brings all the functionalities togethe.
         """
         
         player = Player()
-        computer = Computer()
+        computer = Computer(difficulty, self.check_winner)
         
         while True:
             self.board = [' ' for _ in range(9)]
@@ -144,19 +150,49 @@ class Player:
                 print("Please enter a number between 1 and 9.")    
                 
 class Computer:
-    """Handles computer actions"""
+    def __init__(self, difficulty, check_winner_func):
+        self.difficulty = difficulty
+        self.check_winner_func = check_winner_func
+        
+    def find_winning_move(self, board, symbol):
+        for i in range(9):
+            if board[i] == ' ':
+                board[i] = symbol
+                if self.check_winner_func(symbol):
+                    return True
+                board[i] = ' '    
+        return False 
     
+    def find_blocking_move(self, board):
+        for i in range(9):
+            if board[i] == ' ':
+                board[i] = 'X'
+                if self.check_winner_func('X'):
+                    board[i] = 'O'
+                    return True
+                board[i] = ' '
+        return False              
+        
     def make_move(self, board):
-        """
-        Makes a random move for the computer and updates the board.
-        """
-        position = random.choice([i for i, x in enumerate(board) if x == ' '])
-        board[position] = 'O'                           
+        if self.difficulty == 'h':
+            if self.find_winning_move(board, 'O'):
+                return
+            if self.find_blocking_move(board):
+                return
+            
+        elif self.difficulty == 'm':
+            if self.find_winning_move(board, 'O'):
+                return    
+        
+        available_positions = [i for i, x in enumerate(board) if x == ' ']
+        if available_positions:
+            position = random.choice(available_positions)
+            board[position] = 'O'
                 
 
 if __name__ == "__main__":
-    WelcomeScreen.display()
+    difficulty = WelcomeScreen.display()
     game = TicTacToe()
-    game.play_game()      
+    game.play_game(difficulty)      
     
     
