@@ -1,6 +1,9 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 import random
 import os
+from colorama import init, Fore, Back, Style
+
+init(autoreset=True)
 
 def clearConsole():
     command = 'clear'
@@ -8,12 +11,12 @@ def clearConsole():
         command = 'cls'
     os.system(command)
 
-clearConsole()
+# clearConsole()
 
 class WelcomeScreen:
     @staticmethod
     def display():
-        print("""
+        print(Fore.CYAN + Style.BRIGHT + """
                       
   _______          ______               ______         
  /_  __(_)____    /_  __/___ ______    /_  __/___  ___ 
@@ -23,9 +26,9 @@ class WelcomeScreen:
                                                        
       
         """)
-        print("===================================")
-        print("     Welcome to Tic-Tac-Toe! \U0001F604")
-        print("===================================")
+        print(Fore.YELLOW + "===================================")
+        print(Fore.YELLOW + "     Welcome to Tic-Tac-Toe!")
+        print(Fore.YELLOW + "===================================")
         print("Here are the rules:")
         print("1. The board has positions 1-9 starting from top-left and going row-wise.")
         print("2. You are 'X' and the computer is 'O'.")
@@ -66,13 +69,13 @@ class TicTacToe:
     
     def print_board(self):
         """Prints the game board."""
-        print("\033[1;32m        Tic-Tac-Toe  \033[0m")  # Adding a green color to the title
-        print("\033[1;32m---------------------------\033[0m")
+        print(Fore.CYAN + Style.BRIGHT + "        Tic-Tac-Toe  ") 
+        print(Fore.BLUE + "---------------------------")
         for i in range(0, 9, 3):
             print(f" {i+1} | {i+2} | {i+3}       {self.board[i]} | {self.board[i + 1]} | {self.board[i + 2]} ")
             if i < 6:
                 print("---+---+---     ---+---+---")
-        print("\033[1;32m---------------------------\033[0m")
+        print(Fore.BLUE + "---------------------------")
         
             
     def check_winner(self, char):
