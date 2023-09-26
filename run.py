@@ -72,7 +72,15 @@ class TicTacToe:
         print(Fore.CYAN + Style.BRIGHT + "        Tic-Tac-Toe  ") 
         print(Fore.BLUE + "---------------------------")
         for i in range(0, 9, 3):
-            print(f" {i+1} | {i+2} | {i+3}       {self.board[i]} | {self.board[i + 1]} | {self.board[i + 2]} ")
+            row = []
+            for j in range(3):
+                if self.board[i+j] == 'X':
+                    row.append(Fore.GREEN + self.board[i+j] + Style.RESET_ALL)
+                elif self.board[i+j] == 'O':
+                    row.append(Fore.RED + self.board[i+j] + Style.RESET_ALL)
+                else:
+                    row.append(self.board[i+j])
+            print(f" {i+1} | {i+2} | {i+3}       {row[0]} | {row[1]} | {row[2]} ")
             if i < 6:
                 print("---+---+---     ---+---+---")
         print(Fore.BLUE + "---------------------------")
