@@ -54,7 +54,12 @@ class TicTacToe:
         self.difficulty = difficulty
         
     def display_score(self):
-        """Displays the current score."""
+        """Displays the current score and difficulty."""
+        
+        difficulty_mapping = {'e': 'Easy', 'm': 'Medium', 'h': 'Hard'}
+        difficulty_name = difficulty_mapping.get(self.difficulty, "Unknown")
+        
+        print(f"Difficulty Level: {difficulty_name}")
         print(f"Current Score: Player {self.player_score} - Computer {self.computer_score}")
         print("===================================")    
         
