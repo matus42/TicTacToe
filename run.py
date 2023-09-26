@@ -1,11 +1,20 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 import random
+import os
+
+def clearConsole():
+    command = 'clear'
+    if os.name in ('nt', 'dos'):  # If Machine is running on Windows, use cls
+        command = 'cls'
+    os.system(command)
+
+clearConsole()
 
 class WelcomeScreen:
     @staticmethod
     def display():
-        print("\033[94m" + """
-        
+        print("""
+                      
   _______          ______               ______         
  /_  __(_)____    /_  __/___ ______    /_  __/___  ___ 
   / / / / ___/_____/ / / __ `/ ___/_____/ / / __ \/ _ \\
@@ -13,7 +22,7 @@ class WelcomeScreen:
 /_/ /_/\___/     /_/  \__,_/\___/     /_/  \____/\___/ 
                                                        
       
-        """ + "\033[0m")
+        """)
         print("===================================")
         print("     Welcome to Tic-Tac-Toe! \U0001F604")
         print("===================================")
@@ -43,6 +52,11 @@ class TicTacToe:
         self.player_score = 0
         self.computer_score = 0
         self.difficulty = difficulty
+        
+    def display_score(self):
+        """Displays the current score."""
+        print(f"Current Score: Player {self.player_score} - Computer {self.computer_score}")
+        print("===================================")    
         
     
     def print_board(self):
@@ -109,9 +123,12 @@ class TicTacToe:
         game_count = 0
         
         while True:
+            clearConsole()
             self.board = [' ' for _ in range(9)]
         
             while True:
+                clearConsole()
+                self.display_score()
                 self.print_board()
                 
                 if self.make_and_check_move(player, 'X', "Player wins!\n"):
@@ -128,11 +145,15 @@ class TicTacToe:
                 if self.check_draw():
                     break
             
-            print(f"Current Score: Player {self.player_score} - Computer {self.computer_score}")
+            # print(f"Current Score: Player {self.player_score} - Computer {self.computer_score}")
             
             game_count += 1
             if game_count == 2:
-                print("You've played 5 games!")
+                clearConsole()
+                self.display_score()
+                self.print_board()
+                
+                print("You've played 2 games!")
                 if self.difficulty == 'h':
                     while True:
                         choice = input("Do you want to keep playing? (y/n):").lower()
@@ -220,6 +241,7 @@ class Computer:
 
 if __name__ == "__main__":
     difficulty = WelcomeScreen.display()
+    clearConsole()
     game = TicTacToe(difficulty)
     game.play_game()      
     
