@@ -132,7 +132,7 @@ class TicTacToe:
     
     def play_game(self):
         """
-        Main game loop that brings all the functionalities togethe.
+        Main game loop that brings all the functionalities together.
         """
         
         player = Player()
@@ -140,7 +140,6 @@ class TicTacToe:
         game_count = 0
         
         while True:
-            clearConsole()
             self.board = [' ' for _ in range(9)]
         
             while True:
@@ -148,11 +147,23 @@ class TicTacToe:
                 self.display_score()
                 self.print_board()
                 
-                
                 if self.make_and_check_move(player, 'X', "Player wins!\n"):
+                    clearConsole()  # Clear console before showing the winning board and message
                     self.update_score('Player')
+                    self.display_score()
+                    self.print_board()
+                    print("Player wins!\n")
+                    time.sleep(2)
+                    clearConsole()
                     break
+                
                 if self.check_draw():
+                    clearConsole()
+                    self.display_score()
+                    self.print_board()
+                    print("It's a draw!")
+                    time.sleep(2)
+                    clearConsole()
                     break
                     
                 # Computers move
@@ -163,12 +174,23 @@ class TicTacToe:
                 time.sleep(1.3)
             
                 if self.make_and_check_move(computer, 'O', "Computer wins"):
+                    clearConsole()  # Clear console before showing the winning board and message
                     self.update_score('Computer')
+                    self.display_score()
+                    self.print_board()
+                    print("Computer wins")
+                    time.sleep(2)
+                    clearConsole()
                     break
+                
                 if self.check_draw():
+                    clearConsole()
+                    self.display_score()
+                    self.print_board()
+                    print("It's a draw!")
+                    time.sleep(2)
+                    clearConsole()
                     break
-            
-            # print(f"Current Score: Player {self.player_score} - Computer {self.computer_score}")
             
             game_count += 1
             if game_count == 2:
