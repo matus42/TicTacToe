@@ -2,6 +2,7 @@
 import random
 import os
 from colorama import init, Fore, Back, Style
+import time
 
 init(autoreset=True)
 
@@ -147,13 +148,19 @@ class TicTacToe:
                 self.display_score()
                 self.print_board()
                 
+                
                 if self.make_and_check_move(player, 'X', "Player wins!\n"):
                     self.update_score('Player')
                     break
                 if self.check_draw():
                     break
                     
-                print("Computer made its move.")
+                # Computers move
+                clearConsole()
+                self.display_score()
+                self.print_board()
+                print("Computer is thinking...")
+                time.sleep(1.3)
             
                 if self.make_and_check_move(computer, 'O', "Computer wins"):
                     self.update_score('Computer')
