@@ -284,10 +284,23 @@ class Computer:
             board[position] = 'O'
                 
 
+# if __name__ == "__main__":
+#     difficulty = WelcomeScreen.display()
+#     clearConsole()
+#     game = TicTacToe(difficulty)
+#     game.play_game()
+    
 if __name__ == "__main__":
-    difficulty = WelcomeScreen.display()
-    clearConsole()
-    game = TicTacToe(difficulty)
-    game.play_game()      
+    while True:
+        difficulty = WelcomeScreen.display()
+        clearConsole()
+        game = TicTacToe(difficulty)
+        game.play_game()      
+
+        print("\nThank you for playing Tic-Tac-Toe!")
+        choice = input("Would you like to play again? (y/n): ").lower()
+        if choice == 'n':
+            break
+     
     
     
