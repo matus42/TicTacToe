@@ -39,11 +39,11 @@ class WelcomeScreen:
         print("===================================")
 
         difficulty = input("Choose difficulty level - Easy (e), Medium (m),"
-                           " Hard (h): ").lower()
+                           " Hard (h): \n").lower()
         while difficulty not in ['e', 'm', 'h']:
             print("Invalid option. Please choose again.")
             difficulty = input("Choose difficulty level - Easy (e),"
-                               " Medium (m), Hard (h): ").lower()
+                               " Medium (m), Hard (h): \n").lower()
         return difficulty
 
 
@@ -202,7 +202,7 @@ class TicTacToe:
                 if self.difficulty == 'h':
                     while True:
                         choice = input("Do you want to keep playing?"
-                                       " (y/n):").lower()
+                                       " (y/n):\n").lower()
                         if choice in ['y', 'n']:
                             break
                         print("Invalid input. Please choose 'y' or 'n'.")
@@ -211,7 +211,7 @@ class TicTacToe:
                 else:
                     while True:
                         choice = input("Do you want to increase"
-                                       " difficulty or exit? (i/e).")
+                                       " difficulty or exit? (i/e).\n")
                         if choice in ['i', 'e']:
                             break
                         print("Invalid input. Please choose 'i'(increase)"
@@ -236,7 +236,7 @@ class Player:
         while True:
             try:
                 position = int(input(
-                    "Your move! Choose a position (1-9): "
+                    "Your move! Choose a position (1-9): \n"
                     )) - 1
                 if 0 <= position < 9:
                     if board[position] == ' ':
@@ -300,6 +300,6 @@ if __name__ == "__main__":
         game.play_game()
 
         print("\nThank you for playing Tic-Tac-Toe!")
-        choice = input("Would you like to play again? (y/n): ").lower()
+        choice = input("Would you like to play again? (y/n): \n").lower()
         if choice == 'n':
             break
