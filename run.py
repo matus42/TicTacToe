@@ -16,25 +16,8 @@ def clearConsole():
 
 class WelcomeScreen:
     @staticmethod
-    def get_difficulty_input():
-        """
-        Method to obtain difficulty input and validate it.
-        """
-        difficulty_mapping = {
-            'e': 'e', 'easy': 'e',
-            'm': 'm', 'medium': 'm',
-            'h': 'h', 'hard': 'h'
-        }
-        difficulty = input("Choose difficulty level - Easy (e), Medium (m),"
-                           " Hard (h): \n").lower().strip()
-        while difficulty not in difficulty_mapping:
-            print("Invalid option. Please choose again.")
-            difficulty = input("Choose difficulty level - Easy (e), Medium (m)"
-                               ", Hard (h): \n").lower().strip()
-        return difficulty_mapping[difficulty]
-
-    @staticmethod
-    def display():
+    def display_logo_and_rules():
+        """Displays the game logo and rules."""
         print(Fore.CYAN + Style.BRIGHT + r"""
 
   _______          ______               ______
@@ -58,6 +41,36 @@ class WelcomeScreen:
         print("5. If the board fills up without a winner, it's a draw.")
         print("===================================")
 
+    @staticmethod
+    def get_difficulty_input():
+        """
+        Method to obtain difficulty input and validate it.
+        """
+        difficulty_mapping = {
+            'e': 'e', 'easy': 'e',
+            'm': 'm', 'medium': 'm',
+            'h': 'h', 'hard': 'h'
+        }
+
+        error_message = ""
+        while True:
+            clearConsole()
+            WelcomeScreen.display_logo_and_rules()
+
+            if error_message:
+                print(Fore.RED + error_message + Style.RESET_ALL)
+
+            difficulty = input("Choose difficulty level - Easy (e),"
+                               " Medium (m), Hard (h): \n").lower().strip()
+
+            if difficulty in difficulty_mapping:
+                return difficulty_mapping[difficulty]
+
+            error_message = "Invalid option. Please choose again."
+
+    @staticmethod
+    def display():
+        WelcomeScreen.display_logo_and_rules()  # Display the logo and rules
         difficulty = WelcomeScreen.get_difficulty_input()
         return difficulty
 
@@ -211,9 +224,7 @@ class TicTacToe:
 
             game_count += 1
             if game_count == 2:
-                clearConsole()
-                self.display_score()
-                self.print_board()
+                self.display_full_board()
 
                 print("You've played 2 games!")
                 if self.difficulty == 'h':
@@ -222,6 +233,7 @@ class TicTacToe:
                                        " (y/n):\n").lower()
                         if choice in ['y', 'n']:
                             break
+                        self.display_full_board()
                         print("Invalid input. Please choose 'y' or 'n'.")
                     if choice == 'n':
                         return  # exit the game
@@ -324,13 +336,15 @@ if __name__ == "__main__":
         clearConsole()
         game = TicTacToe(difficulty)
         game.play_game()
-
+        game.display_full_board()
         print("\nThank you for playing Tic-Tac-Toe!")
+
         while True:
             choice = input("Would you like to play again? (y/n): \n").lower()
             if choice in ['y', 'n']:
                 break
-            clearConsole()
+            game.display_full_board()
             print("Invalid input. Please choose 'y' or 'n'.")
+
         if choice == 'n':
             break
