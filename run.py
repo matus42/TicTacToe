@@ -16,18 +16,38 @@ def clearConsole():
 
 class WelcomeScreen:
     @staticmethod
+    def get_difficulty_input():
+        """
+        Method to obtain difficulty input and validate it.
+        """
+        difficulty_mapping = {
+            'e': 'e', 'easy': 'e',
+            'm': 'm', 'medium': 'm',
+            'h': 'h', 'hard': 'h'
+        }
+        difficulty = input("Choose difficulty level - Easy (e), Medium (m),"
+                           " Hard (h): \n").lower().strip()
+        while difficulty not in difficulty_mapping:
+            print("Invalid option. Please choose again.")
+            difficulty = input("Choose difficulty level - Easy (e), Medium (m)"
+                               ", Hard (h): \n").lower().strip()
+        return difficulty_mapping[difficulty]
+
+    @staticmethod
     def display():
         print(Fore.CYAN + Style.BRIGHT + r"""
+
   _______          ______               ______
  /_  __(_)____    /_  __/___ ______    /_  __/___  ___
   / / / / ___/_____/ / / __ `/ ___/_____/ / / __ \/ _ \\
  / / / / /__/_____/ / / /_/ / /__/_____/ / / /_/ /  __/
 /_/ /_/\___/     /_/  \__,_/\___/     /_/  \____/\___/
+
         """)
-        print(Fore.YELLOW + "===================================")
-        print(Fore.YELLOW + "     Welcome to Tic-Tac-Toe!")
-        print(Fore.YELLOW + "===================================")
-        print("Here are the rules:")
+        print(Fore.YELLOW + "       ====================================")
+        print(Fore.YELLOW + "             Welcome to Tic-Tac-Toe!")
+        print(Fore.YELLOW + "       ====================================\n")
+        print("Here are the rules:\n")
         print("1. The board has positions 1-9 starting from top-left"
               " and going row-wise.")
         print("2. You are 'X' and the computer is 'O'.")
@@ -38,12 +58,7 @@ class WelcomeScreen:
         print("5. If the board fills up without a winner, it's a draw.")
         print("===================================")
 
-        difficulty = input("Choose difficulty level - Easy (e), Medium (m),"
-                           " Hard (h): \n").lower()
-        while difficulty not in ['e', 'm', 'h']:
-            print("Invalid option. Please choose again.")
-            difficulty = input("Choose difficulty level - Easy (e),"
-                               " Medium (m), Hard (h): \n").lower()
+        difficulty = WelcomeScreen.get_difficulty_input()
         return difficulty
 
 
@@ -66,9 +81,9 @@ class TicTacToe:
         difficulty_mapping = {'e': 'Easy', 'm': 'Medium', 'h': 'Hard'}
         difficulty_name = difficulty_mapping.get(self.difficulty, "Unknown")
 
-        print(f"Difficulty Level: {difficulty_name}")
+        print(f"\n\nDifficulty Level: {difficulty_name}")
         print(f"Current Score: Player {self.player_score} -"
-              " Computer {self.computer_score}")
+              f" Computer {self.computer_score}")
         print("===================================")
 
     def print_board(self):
