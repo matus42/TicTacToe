@@ -129,9 +129,10 @@ class TicTacToe:
             return True
         return False
 
-    def make_and_check_move(self, mover, symbol, win_message):
+    def make_and_check_move(self, mover, symbol, win_message,
+                            game_instance=None):
         """Make a move and check if it resulted in a win"""
-        mover.make_move(self.board)
+        mover.make_move(self.board, game_instance)
         if self.check_winner(symbol):
             self.print_board()
             print(win_message)
@@ -162,7 +163,8 @@ class TicTacToe:
                 self.display_score()
                 self.print_board()
 
-                if self.make_and_check_move(player, 'X', "Player wins!\n"):
+                if self.make_and_check_move(player, 'X', "Player wins!\n,",
+                                            self):
                     clearConsole()
                     self.update_score('Player')
                     self.display_score()
@@ -241,10 +243,16 @@ class TicTacToe:
                         computer = Computer(self.difficulty, self.check_winner)
                 game_count = 0
 
+    def display_full_board(self):
+        """Display score, difficulty and the board"""
+        clearConsole()
+        self.display_score()
+        self.print_board()
+
 
 class Player:
     """Handles player actions."""
-    def make_move(self, board):
+    def make_move(self, board, game_instance):
         """
         Takes input for the next move and updates the board.
         """
@@ -258,10 +266,13 @@ class Player:
                         board[position] = 'X'
                         break
                     else:
+                        game_instance.display_full_board()
                         print("Invalid move. Try again.")
                 else:
+                    game_instance.display_full_board()
                     print("Invalid position. Choose a number between 1 and 9.")
             except ValueError:
+                game_instance.display_full_board()
                 print("Please enter a number between 1 and 9.")
 
 
@@ -289,7 +300,7 @@ class Computer:
                 board[i] = ' '
         return False
 
-    def make_move(self, board):
+    def make_move(self, board, game_instance=None):
         if self.difficulty == 'h':
             if self.find_winning_move(board, 'O'):
                 return
@@ -315,6 +326,11 @@ if __name__ == "__main__":
         game.play_game()
 
         print("\nThank you for playing Tic-Tac-Toe!")
-        choice = input("Would you like to play again? (y/n): \n").lower()
+        while True:
+            choice = input("Would you like to play again? (y/n): \n").lower()
+            if choice in ['y', 'n']:
+                break
+            clearConsole()
+            print("Invalid input. Please choose 'y' or 'n'.")
         if choice == 'n':
             break
