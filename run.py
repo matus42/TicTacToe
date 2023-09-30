@@ -95,8 +95,8 @@ class TicTacToe:
         difficulty_name = difficulty_mapping.get(self.difficulty, "Unknown")
 
         print(f"\n\nDifficulty Level: {difficulty_name}")
-        print(f"Current Score: Player {self.player_score} -"
-              f" Computer {self.computer_score}")
+        print(f"Current Score: Player: {self.player_score} -"
+              f" Computer: {self.computer_score}")
         print("===================================")
 
     def print_board(self):
@@ -172,9 +172,7 @@ class TicTacToe:
             self.board = [' ' for _ in range(9)]
 
             while True:
-                clearConsole()
-                self.display_score()
-                self.print_board()
+                self.display_full_board()
 
                 if self.make_and_check_move(player, 'X', "Player wins!\n,",
                                             self):
@@ -182,24 +180,20 @@ class TicTacToe:
                     self.update_score('Player')
                     self.display_score()
                     self.print_board()
-                    print("Player wins!\n")
+                    print(Fore.GREEN + "Player wins!\n" + Style.RESET_ALL)
                     time.sleep(2)
                     clearConsole()
                     break
 
                 if self.check_draw():
-                    clearConsole()
-                    self.display_score()
-                    self.print_board()
+                    self.display_full_board()
                     print("It's a draw!")
                     time.sleep(2)
                     clearConsole()
                     break
 
                 # Computers move
-                clearConsole()
-                self.display_score()
-                self.print_board()
+                self.display_full_board()
                 print("Computer is thinking...")
                 time.sleep(1.3)
 
@@ -214,9 +208,7 @@ class TicTacToe:
                     break
 
                 if self.check_draw():
-                    clearConsole()
-                    self.display_score()
-                    self.print_board()
+                    self.display_full_board()
                     print("It's a draw!")
                     time.sleep(2)
                     clearConsole()
@@ -225,35 +217,34 @@ class TicTacToe:
             game_count += 1
             if game_count == 2:
                 self.display_full_board()
-
                 print("You've played 2 games!")
-                if self.difficulty == 'h':
-                    while True:
-                        choice = input("Do you want to keep playing?"
-                                       " (y/n):\n").lower()
-                        if choice in ['y', 'n']:
-                            break
-                        self.display_full_board()
-                        print("Invalid input. Please choose 'y' or 'n'.")
-                    if choice == 'n':
-                        return  # exit the game
-                else:
-                    while True:
-                        choice = input("Do you want to increase"
-                                       " difficulty or exit? (i/e).\n")
-                        if choice in ['i', 'e']:
-                            break
-                        print("Invalid input. Please choose 'i'(increase)"
-                              " or 'e'(exit).")
-                    if choice == 'e':
-                        return  # exit the game
-                    elif choice == 'i':
-                        if self.difficulty == 'e':
-                            self.difficulty = 'm'
-                        elif self.difficulty == 'm':
-                            self.difficulty = 'h'
-                        computer = Computer(self.difficulty, self.check_winner)
-                game_count = 0
+
+                while True:
+
+                    if self.difficulty == 'h':
+                        choice = input("Continue playing, increase difficulty,"
+                                       " or exit? (c/i/e):\n").lower().strip()
+                    else:
+                        choice = input("Continue playing, increase difficulty,"
+                                       " or exit? (c/i/e):\n").lower().strip()
+
+                    if choice in ['c', 'i', 'e']:
+                        game_count = 0
+                        break
+                    self.display_full_board()
+                    print(Fore.RED + "Invalid input. Please choose"
+                          " 'c'(continue), 'i'(increase),"
+                          " or 'e'(exit)." + Style.RESET_ALL)
+
+                if choice == 'e':
+                    return
+                elif choice == 'i':
+                    if self.difficulty == 'e':
+                        self.difficulty = 'm'
+                    elif self.difficulty == 'm':
+                        self.difficulty = 'h'
+                    computer = Computer(self.difficulty, self.check_winner)
+                    game_count = 0
 
     def display_full_board(self):
         """Display score, difficulty and the board"""
@@ -279,13 +270,16 @@ class Player:
                         break
                     else:
                         game_instance.display_full_board()
-                        print("Invalid move. Try again.")
+                        print(Fore.RED + "Invalid move."
+                              " Try again." + Style.RESET_ALL)
                 else:
                     game_instance.display_full_board()
-                    print("Invalid position. Choose a number between 1 and 9.")
+                    print(Fore.RED + "Invalid position. Choose a"
+                          " number between 1 and 9." + Style.RESET_ALL)
             except ValueError:
                 game_instance.display_full_board()
-                print("Please enter a number between 1 and 9.")
+                print(Fore.RED + "Please enter a number"
+                      " between 1 and 9." + Style.RESET_ALL)
 
 
 class Computer:
@@ -337,14 +331,16 @@ if __name__ == "__main__":
         game = TicTacToe(difficulty)
         game.play_game()
         game.display_full_board()
-        print("\nThank you for playing Tic-Tac-Toe!")
+        print(Fore.YELLOW + "\nThank you for playing"
+              " Tic-Tac-Toe!" + Style.RESET_ALL)
 
         while True:
             choice = input("Would you like to play again? (y/n): \n").lower()
             if choice in ['y', 'n']:
                 break
             game.display_full_board()
-            print("Invalid input. Please choose 'y' or 'n'.")
+            print(Fore.RED + "Invalid input. Please choose"
+                  " 'y' or 'n'." + Style.RESET_ALL)
 
         if choice == 'n':
             break
