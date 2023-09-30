@@ -207,13 +207,6 @@ class TicTacToe:
                     clearConsole()
                     break
 
-                if self.check_draw():
-                    self.display_full_board()
-                    print("It's a draw!")
-                    time.sleep(2)
-                    clearConsole()
-                    break
-
             game_count += 1
             if game_count == 2:
                 self.display_full_board()
@@ -222,19 +215,28 @@ class TicTacToe:
                 while True:
 
                     if self.difficulty == 'h':
-                        choice = input("Continue playing, increase difficulty,"
-                                       " or exit? (c/i/e):\n").lower().strip()
+                        choice = input("Continue playing or exit?"
+                                       " (c/e):\n").lower().strip()
                     else:
                         choice = input("Continue playing, increase difficulty,"
                                        " or exit? (c/i/e):\n").lower().strip()
 
-                    if choice in ['c', 'i', 'e']:
+                    valid_choices = (['c', 'i', 'e']
+                                     if self.difficulty != 'h'
+                                     else ['c', 'e'])
+
+                    if choice in valid_choices:
                         game_count = 0
                         break
                     self.display_full_board()
-                    print(Fore.RED + "Invalid input. Please choose"
-                          " 'c'(continue), 'i'(increase),"
-                          " or 'e'(exit)." + Style.RESET_ALL)
+
+                    if self.difficulty == 'h':
+                        print(Fore.RED + "Invalid input. Please choose 'c'"
+                              "(continue) or 'e'(exit)." + Style.RESET_ALL)
+                    else:
+                        print(Fore.RED + "Invalid input. Please choose 'c'"
+                              "(continue), 'i'(increase),"
+                              " or 'e'(exit)." + Style.RESET_ALL)
 
                 if choice == 'e':
                     return
@@ -243,7 +245,7 @@ class TicTacToe:
                         self.difficulty = 'm'
                     elif self.difficulty == 'm':
                         self.difficulty = 'h'
-                    computer = Computer(self.difficulty, self.check_winner)
+                        computer = Computer(self.difficulty, self.check_winner)
                     game_count = 0
 
     def display_full_board(self):
