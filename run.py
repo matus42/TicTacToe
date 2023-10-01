@@ -194,7 +194,11 @@ class TicTacToe:
 
                 # Computers move
                 self.display_full_board()
-                print("Computer is thinking...")
+                print("Computer is thinking", end="")
+                for _ in range(3):
+                    time.sleep(0.4)
+                    print(".", end="", flush=True)
+                print()
                 time.sleep(1.3)
 
                 if self.make_and_check_move(computer, 'O', "Computer wins"):
