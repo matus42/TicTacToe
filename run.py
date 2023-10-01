@@ -1,4 +1,4 @@
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
+# Initial imports
 import random
 import os
 from colorama import init, Fore, Style
@@ -8,6 +8,9 @@ init(autoreset=True)
 
 
 def clearConsole():
+    """
+    Clears the console screen based on the operating system.
+    """
     command = 'clear'
     if os.name in ('nt', 'dos'):  # If Machine is running on Windows, use cls
         command = 'cls'
@@ -15,64 +18,62 @@ def clearConsole():
 
 
 class WelcomeScreen:
-    @staticmethod
-    def display_logo_and_rules():
-        """Displays the game logo and rules."""
-        print(Fore.CYAN + Style.BRIGHT + r"""
-
+    """
+    Manages the initial screen display showing the game rules and the logo.
+    """
+    LOGO = Fore.CYAN + Style.BRIGHT + r"""
   _______          ______               ______
  /_  __(_)____    /_  __/___ ______    /_  __/___  ___
-  / / / / ___/_____/ / / __ `/ ___/_____/ / / __ \/ _ \\
+  / / / / ___/_____/ / / __ `/ ___/_____/ / / __ \/ _ \
  / / / / /__/_____/ / / /_/ / /__/_____/ / / /_/ /  __/
 /_/ /_/\___/     /_/  \__,_/\___/     /_/  \____/\___/
+    """
 
-        """)
-        print(Fore.YELLOW + "       ====================================")
-        print(Fore.YELLOW + "             Welcome to Tic-Tac-Toe!")
-        print(Fore.YELLOW + "       ====================================\n")
-        print("Here are the rules:\n")
-        print("1. The board has positions 1-9 starting from top-left"
-              " and going row-wise.")
-        print("2. You are 'X' and the computer is 'O'.")
-        print("3. To win, get three of your marks in a row, column,"
-              " or diagonal.")
-        print("4. Input your move as a number between"
-              " 1 and 9 to place your mark.")
-        print("5. If the board fills up without a winner, it's a draw.")
-        print("===================================")
+    RULES = Fore.YELLOW + """
+       ====================================
+             Welcome to Tic-Tac-Toe!
+       ====================================
+
+Here are the rules:
+
+1. The board has positions 1-9 starting from top-left and going row-wise.
+2. You are 'X' and the computer is 'O'.
+3. To win, get three of your marks in a row, column, or diagonal.
+4. Input your move as a number between 1 and 9 to place your mark.
+5. If the board fills up without a winner, it's a draw.
+===================================
+    """
+
+    @staticmethod
+    def display_logo_and_rules():
+        """
+        Displays the game logo and rules.
+        """
+        clearConsole()
+        print(WelcomeScreen.LOGO)
+        print(WelcomeScreen.RULES)
 
     @staticmethod
     def get_difficulty_input():
         """
-        Method to obtain difficulty input and validate it.
+        Obtains the difficulty level input from the user and validates it.
         """
-        difficulty_mapping = {
-            'e': 'e', 'easy': 'e',
-            'm': 'm', 'medium': 'm',
-            'h': 'h', 'hard': 'h'
-        }
-
+        valid_difficulties = ['e', 'easy', 'm', 'medium', 'h', 'hard']
         error_message = ""
-        while True:
-            clearConsole()
-            WelcomeScreen.display_logo_and_rules()
 
+        while True:
+            WelcomeScreen.display_logo_and_rules()
             if error_message:
                 print(Fore.RED + error_message + Style.RESET_ALL)
-
-            difficulty = input("Choose difficulty level - Easy (e),"
-                               " Medium (m), Hard (h): \n").lower().strip()
-
-            if difficulty in difficulty_mapping:
-                return difficulty_mapping[difficulty]
-
+            difficulty = input("Choose difficulty level - Easy (e), Medium (m)"
+                               ", Hard (h): \n").lower().strip()
+            if difficulty in valid_difficulties:
+                return difficulty[0]
             error_message = "Invalid option. Please choose again."
 
     @staticmethod
     def display():
-        WelcomeScreen.display_logo_and_rules()  # Display the logo and rules
-        difficulty = WelcomeScreen.get_difficulty_input()
-        return difficulty
+        return WelcomeScreen.get_difficulty_input()
 
 
 class TicTacToe:
