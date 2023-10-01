@@ -22,26 +22,26 @@ class WelcomeScreen:
     Manages the initial screen display showing the game rules and the logo.
     """
     LOGO = Fore.CYAN + Style.BRIGHT + r"""
-  _______          ______               ______
- /_  __(_)____    /_  __/___ ______    /_  __/___  ___
-  / / / / ___/_____/ / / __ `/ ___/_____/ / / __ \/ _ \
- / / / / /__/_____/ / / /_/ / /__/_____/ / / /_/ /  __/
-/_/ /_/\___/     /_/  \__,_/\___/     /_/  \____/\___/
+   _______          ______               ______
+  /_  __(_)____    /_  __/___ ______    /_  __/___  ___
+   / / / / ___/_____/ / / __ `/ ___/_____/ / / __ \/ _ \
+  / / / / /__/_____/ / / /_/ / /__/_____/ / / /_/ /  __/
+ /_/ /_/\___/     /_/  \__,_/\___/     /_/  \____/\___/
     """
 
     RULES = Fore.YELLOW + """
-       ====================================
-             Welcome to Tic-Tac-Toe!
-       ====================================
+        ====================================
+              Welcome to Tic-Tac-Toe!
+        ====================================
 
-Here are the rules:
+ Here are the rules:
 
-1. The board has positions 1-9 starting from top-left and going row-wise.
-2. You are 'X' and the computer is 'O'.
-3. To win, get three of your marks in a row, column, or diagonal.
-4. Input your move as a number between 1 and 9 to place your mark.
-5. If the board fills up without a winner, it's a draw.
-===================================
+ 1. The board has positions 1-9 starting from top-left and going row-wise.
+ 2. You are 'X' and the computer is 'O'.
+ 3. To win, get three of your marks in a row, column, or diagonal.
+ 4. Input your move as a number between 1 and 9 to place your mark.
+ 5. If the board fills up without a winner, it's a draw.
+ ===================================
     """
 
     @staticmethod
@@ -56,7 +56,7 @@ Here are the rules:
     @staticmethod
     def get_difficulty_input():
         """
-        Obtains the difficulty level input from the user and validates it.
+        Gets difficulty level input from the user and validates it.
         """
         valid_difficulties = ['e', 'easy', 'm', 'medium', 'h', 'hard']
         error_message = ""
@@ -73,16 +73,19 @@ Here are the rules:
 
     @staticmethod
     def display():
+        """
+        Displays the welcome screen and returns the choosen difficulty level.
+        """
         return WelcomeScreen.get_difficulty_input()
 
 
 class TicTacToe:
     """
-    Manages the game board and flow.
+    A class to represent the TicTacToe game, managing its board and flow.
     """
     def __init__(self, difficulty):
         """
-        Initialize an empty game board.
+        Initialize the game board and set initial scores.
         """
         self.board = [' ' for _ in range(9)]
         self.player_score = 0
@@ -90,7 +93,7 @@ class TicTacToe:
         self.difficulty = difficulty
 
     def display_score(self):
-        """Displays the current score and difficulty."""
+        """Displays the current game's score and difficulty level."""
 
         difficulty_mapping = {'e': 'Easy', 'm': 'Medium', 'h': 'Hard'}
         difficulty_name = difficulty_mapping.get(self.difficulty, "Unknown")
@@ -101,9 +104,11 @@ class TicTacToe:
         print("===================================")
 
     def print_board(self):
-        """Prints the game board."""
+        """Displays the current state of the TicTacToe board with symbols."""
         print(Fore.CYAN + Style.BRIGHT + "        Tic-Tac-Toe  ")
         print(Fore.BLUE + "---------------------------")
+
+        # Display each row of the board with colored symbols for X and O
         for i in range(0, 9, 3):
             row = []
             for j in range(3):
@@ -121,8 +126,9 @@ class TicTacToe:
 
     def check_winner(self, char):
         """
-        Check for a winning condition for 'char' in game.
+        Check for a winning condition based on the provided symbol.
         """
+        # Check rows, columns, and diagonals for win
         for i in range(0, 9, 3):
             if self.board[i] == self.board[i + 1] == self.board[i + 2] == char:
                 return True
@@ -136,7 +142,9 @@ class TicTacToe:
         return False
 
     def check_draw(self):
-        """Check for a draw"""
+        """
+        Check if the game has reached a draw state.
+        """
         if ' ' not in self.board:
             self.print_board()
             print("It's a draw!")
@@ -172,9 +180,11 @@ class TicTacToe:
         while True:
             self.board = [' ' for _ in range(9)]
 
+            # Game round loop
             while True:
                 self.display_full_board()
 
+                # Player's turn
                 if self.make_and_check_move(player, 'X', "Player wins!\n,",
                                             self):
                     clearConsole()
@@ -193,7 +203,7 @@ class TicTacToe:
                     clearConsole()
                     break
 
-                # Computers move
+                # Computer's turn
                 self.display_full_board()
                 print("Computer is thinking", end="")
                 for _ in range(3):
@@ -212,13 +222,14 @@ class TicTacToe:
                     clearConsole()
                     break
 
+            # Check for end-of-session after 2 rounds
             game_count += 1
             if game_count == 2:
                 self.display_full_board()
                 print("You've played 2 games!")
 
+                # Post-session choices
                 while True:
-
                     if self.difficulty == 'h':
                         choice = input("Continue playing or exit?"
                                        " (c/e):\n").lower().strip()
@@ -246,6 +257,7 @@ class TicTacToe:
                 if choice == 'e':
                     return
                 elif choice == 'i':
+                    # Adjust difficulty
                     if self.difficulty == 'e':
                         self.difficulty = 'm'
                     elif self.difficulty == 'm':
@@ -264,14 +276,16 @@ class Player:
     """Handles player actions."""
     def make_move(self, board, game_instance):
         """
-        Takes input for the next move and updates the board.
+        Prompts the player to make a move and updates the board accordingly.
         """
         while True:
             try:
                 position = int(input(
                     "Your move! Choose a position (1-9): \n"
                     )) - 1
+                # Check if the input position is within the valid range
                 if 0 <= position < 9:
+                    # Check if the chosen position is unoccupied
                     if board[position] == ' ':
                         board[position] = 'X'
                         break
@@ -283,6 +297,7 @@ class Player:
                     game_instance.display_full_board()
                     print(Fore.RED + "Invalid position. Choose a"
                           " number between 1 and 9." + Style.RESET_ALL)
+            # Handle non-integer inputs
             except ValueError:
                 game_instance.display_full_board()
                 print(Fore.RED + "Please enter a number"
@@ -290,20 +305,33 @@ class Player:
 
 
 class Computer:
+    """
+    handles computer's decisions and actions in the game.
+    """
     def __init__(self, difficulty, check_winner_func):
+        """
+        Initialize the computer player with the specified difficulty.
+        """
         self.difficulty = difficulty
         self.check_winner_func = check_winner_func
 
     def find_winning_move(self, board, symbol):
+        """
+        Find a move for the computer that would result in a win.
+        """
         for i in range(9):
             if board[i] == ' ':
                 board[i] = symbol
                 if self.check_winner_func(symbol):
                     return True
+                # Reset the board to its original state
                 board[i] = ' '
         return False
 
     def find_blocking_move(self, board):
+        """
+        Find a move that blocks the player from winning on the next turn.
+        """
         for i in range(9):
             if board[i] == ' ':
                 board[i] = 'X'
@@ -314,16 +342,22 @@ class Computer:
         return False
 
     def make_move(self, board, game_instance=None):
+        """
+        Make a move based on the difficulty setting and update the board.
+        """
+        # Hard diff.: comp tries to win, then blocks player from winning
         if self.difficulty == 'h':
             if self.find_winning_move(board, 'O'):
                 return
             if self.find_blocking_move(board):
                 return
 
+        # Medium diff.: computer only tries to win
         elif self.difficulty == 'm':
             if self.find_winning_move(board, 'O'):
                 return
 
+        # Easy diff.: computer only makes random moves
         available_positions = [i for i, x in enumerate(board) if x == ' ']
         if available_positions:
             position = random.choice(available_positions)
@@ -331,20 +365,35 @@ class Computer:
 
 
 if __name__ == "__main__":
+    """
+    Main game loop
+    """
     while True:
+        # Clear any previous console output for a fresh game start
         clearConsole()
+
+        # Display the welcome screen and retrieve the chosen difficulty
         difficulty = WelcomeScreen.display()
+
+        # Clear console again for the game
         clearConsole()
+
+        # Initialize the game instance with chosen difficulty
         game = TicTacToe(difficulty)
+
+        # Start the game
         game.play_game()
+
+        # Display the board and thank the player for playing
         game.display_full_board()
         print(Fore.YELLOW + "\nThank you for playing"
               " Tic-Tac-Toe!" + Style.RESET_ALL)
 
+        # Ask the player if they wish to play again
         while True:
             choice = input("Would you like to play again? (y/n): \n").lower()
             if choice in ['y', 'n']:
-                break
+                break  # Exit this loop if valid input
             game.display_full_board()
             print(Fore.RED + "Invalid input. Please choose"
                   " 'y' or 'n'." + Style.RESET_ALL)
