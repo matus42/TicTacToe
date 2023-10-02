@@ -390,13 +390,14 @@ if __name__ == "__main__":
               " Tic-Tac-Toe!" + Style.RESET_ALL)
 
         # Ask the player if they wish to play again
-        while True:
-            choice = input("Would you like to play again? (y/n): \n").lower()
-            if choice in ['y', 'n']:
-                break  # Exit this loop if valid input
-            game.display_full_board()
-            print(Fore.RED + "Invalid input. Please choose"
-                  " 'y' or 'n'." + Style.RESET_ALL)
+        choice = input("Play again? (Yes/No): ").lower().strip()
 
-        if choice == 'n':
+        while choice not in ['yes', 'y', 'no', 'n']:
+            game.display_full_board()
+            print(Fore.RED + "Invalid input. Please type 'Yes'"
+                  " or 'No'." + Style.RESET_ALL)
+            choice = input("Play again? (Yes/No): ").lower().strip()
+        if choice in ['no', 'n']:
+            print(Fore.GREEN + "Goodbye! Hope to see you"
+                  " again soon." + Style.RESET_ALL)
             break
