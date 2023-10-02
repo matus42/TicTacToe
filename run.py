@@ -22,11 +22,12 @@ class WelcomeScreen:
     Manages the initial screen display showing the game rules and the logo.
     """
     LOGO = Fore.CYAN + Style.BRIGHT + r"""
-   _______          ______               ______
-  /_  __(_)____    /_  __/___ ______    /_  __/___  ___
-   / / / / ___/_____/ / / __ `/ ___/_____/ / / __ \/ _ \
-  / / / / /__/_____/ / / /_/ / /__/_____/ / / /_/ /  __/
- /_/ /_/\___/     /_/  \__,_/\___/     /_/  \____/\___/
+
+  _____ _         _____             _____
+ |_   _(_) ___   |_   _|_ _  ___   |_   _|__   ___
+   | | | |/ __|____| |/ _` |/ __|____| |/ _ \ / _ \
+   | | | | (_|_____| | (_| | (_|_____| | (_) |  __/
+   |_| |_|\___|    |_|\__,_|\___|    |_|\___/ \___|
     """
 
     RULES = Fore.YELLOW + """
@@ -35,7 +36,6 @@ class WelcomeScreen:
         ====================================
 
  Here are the rules:
-
  1. The board has positions 1-9 starting from top-left and going row-wise.
  2. You are 'X' and the computer is 'O'.
  3. To win, get three of your marks in a row, column, or diagonal.
@@ -65,8 +65,9 @@ class WelcomeScreen:
             WelcomeScreen.display_logo_and_rules()
             if error_message:
                 print(Fore.RED + error_message + Style.RESET_ALL)
-            difficulty = input("Choose difficulty level - Easy (e), Medium (m)"
-                               ", Hard (h): \n").lower().strip()
+            difficulty = input(Fore.CYAN + "Choose difficulty level -"
+                               " Easy (e), Medium (m), Hard (h): \n"
+                               + Style.RESET_ALL).lower().strip()
             if difficulty in valid_difficulties:
                 return difficulty[0]
             error_message = "Invalid option. Please choose again."
