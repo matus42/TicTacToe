@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-about game
+The purpose of this project was to re-imagine a classic game using modern web technologies, providing both nostalgic feelings for those who played it during their childhood and introducing it to new generations.
 
 View the live site [here](https://herokuapp.com/).
 

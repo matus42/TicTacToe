@@ -98,10 +98,12 @@ class TicTacToe:
         difficulty_mapping = {'e': 'Easy', 'm': 'Medium', 'h': 'Hard'}
         difficulty_name = difficulty_mapping.get(self.difficulty, "Unknown")
 
-        print(f"\n\nDifficulty Level: {difficulty_name}")
-        print(f"Current Score: Player: {self.player_score} -"
-              f" Computer: {self.computer_score}")
-        print("===================================")
+        print("\nDifficulty Level: " + Fore.CYAN + f"{difficulty_name}")
+        print("Current score:")
+        print("Player: " + Fore.GREEN + f"{self.player_score}"
+              + Style.RESET_ALL + " - " "Computer: "
+              + Fore.RED + f"{self.computer_score}")
+        print("===========================")
 
     def print_board(self):
         """Displays the current state of the TicTacToe board with symbols."""
@@ -217,7 +219,7 @@ class TicTacToe:
                     self.update_score('Computer')
                     self.display_score()
                     self.print_board()
-                    print("Computer wins")
+                    print(Fore.RED + "Computer wins" + Style.RESET_ALL)
                     time.sleep(2)
                     clearConsole()
                     break
