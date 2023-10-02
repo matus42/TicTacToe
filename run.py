@@ -188,7 +188,7 @@ class TicTacToe:
                 self.display_full_board()
 
                 # Player's turn
-                if self.make_and_check_move(player, 'X', "Player wins!\n,",
+                if self.make_and_check_move(player, 'X', "Player wins!\n",
                                             self):
                     clearConsole()
                     self.update_score('Player')

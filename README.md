@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-The purpose of this project was to re-imagine a classic game using modern web technologies, providing both nostalgic feelings for those who played it during their childhood and introducing it to new generations.
+Tic Tac Toe, also known as Noughts and Crosses, is a timeless classic that pits two players against each other in a 3x3 grid. The goal is simple: be the first to get three of your marks in a row, either horizontally, vertically, or diagonally.
 
 View the live site [here](https://herokuapp.com/).
 
@@ -29,3 +29,34 @@ View the live site [here](https://herokuapp.com/).
    * [Cloning The Repository](#cloning-the-repository)
 * [Credits](#credits)
 * [Acknowledgements](#acknowledgements)
+
+## Purpose
+
+The purpose of this project was to re-imagine a classic game using modern web technologies, providing both nostalgic feelings for those who played it during their childhood and introducing it to new generations.
+
+## User Experience
+
+### Project Goals 
+
+As the site owner, I want the game to:
+* Provide an intuitive user interface.
+* Ensure smooth gameplay.
+* Encourage users to play multiple rounds.
+
+[Back to top](#contents)
+
+### User Stories
+
+* As a casual player, I want a game that is easy to understand so I can start playing immidiately.
+* As a competitive  player, I want the game to challenge me.
+* As a nostalgic gamer, I want the classic look and feel so I can reminisce about the old days.
+
+### Program flowchart
+
+The flowchart was created using [Lucidchart](https://www.lucidchart.com/pages/).
+
+![flowchart-screenshot](docs/flowchart/FlowChart.png)
+
+
+
+
