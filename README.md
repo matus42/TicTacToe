@@ -130,12 +130,43 @@ After a set of games, player can choose to continue, increase difficulty, or exi
 Provides a fresh view for each move by clearing the console, also if the user enters an incorrect or invalid command, the console will instantly clear itself, prompting the user to input the correct command without any lingering distractions. This design prioritizes user experience, ensuring that tasks are performed with ease and minimal interference.
 
 
-## Future Features
+### Future Features
 
 1. Multiplayer Mode: A mode where players can face off against each other.
 2. Enhanced AI: Considering the integration of the Minimax algorithm to make the AI opponent more strategic.
 3. Username Integration: The option for players to set and use custom usernames might be introduced.
 4. Increased Competition: Looking into ways to elevate the gameplay for a more challenging experience.
+
+
+## Technologies Used
+
+* [Lucidchart](https://www.lucidchart.com/pages/)
+    * Used to create the program flowchart.
+* [HTML5](https://html.spec.whatwg.org/)
+    * (provided in the [code institute template](https://github.com/Code-Institute-Org/python-essentials-template)).
+* [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
+    * (provided in the [code institute template](https://github.com/Code-Institute-Org/python-essentials-template)).
+* [Python 3.11.5](https://www.python.org/)
+    * The main programming language used for the game's logic.
+* [GitHub](https://github.com/)
+    * Used to store the project's repository and manage the versioning of the application.
+
+## Python Packages Used
+
+* random: 
+    * Used for generating random numbers to decide the computer's move in the game.
+* os: 
+    * Used to interact with the operating system, mainly to clear the console screen.
+* [colorama](https://pypi.org/project/colorama/):
+    * Helps in adding colored output to the terminal for an enhanced user experience.
+    * Components: `init`, `Fore`, `Style`
+* time: 
+    * Used to introduce small delays for a better game flow experience.    
+
+
+
+
+
 
 
 
