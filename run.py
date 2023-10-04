@@ -233,15 +233,17 @@ class TicTacToe:
                 # Post-session choices
                 while True:
                     if self.difficulty == 'h':
-                        choice = input("Continue playing or exit?"
-                                       " (c/e):\n").lower().strip()
+                        choice = input("Do you want to continue (c)"
+                                       " or exit (e)?\n").lower().strip()
                     else:
-                        choice = input("Continue playing, increase difficulty,"
-                                       " or exit? (c/i/e):\n").lower().strip()
+                        choice = input("Do you want to continue (c), increase"
+                                       " (i) or exit (e)?\n").lower().strip()
 
-                    valid_choices = (['c', 'i', 'e']
-                                     if self.difficulty != 'h'
-                                     else ['c', 'e'])
+                    valid_choices = (
+                        ['c', 'continue', 'i', 'increase', 'e', 'exit']
+                        if self.difficulty != 'h'
+                        else ['c', 'continue', 'e', 'exit']
+                    )
 
                     if choice in valid_choices:
                         game_count = 0
@@ -249,16 +251,17 @@ class TicTacToe:
                     self.display_full_board()
 
                     if self.difficulty == 'h':
-                        print(Fore.RED + "Invalid input. Please choose 'c'"
-                              "(continue) or 'e'(exit)." + Style.RESET_ALL)
+                        print(Fore.RED + "Invalid input. Please choose"
+                              " 'continue' (c) or 'exit'"
+                              " (e)." + Style.RESET_ALL)
                     else:
-                        print(Fore.RED + "Invalid input. Please choose 'c'"
-                              "(continue), 'i'(increase),"
-                              " or 'e'(exit)." + Style.RESET_ALL)
+                        print(Fore.RED + "Invalid input. Please choose"
+                              " 'continue' (c), 'increase' (i), or 'exit'"
+                              " (e)." + Style.RESET_ALL)
 
-                if choice == 'e':
+                if choice in ['exit', 'e']:
                     return
-                elif choice == 'i':
+                elif choice in ['increase', 'i']:
                     # Adjust difficulty
                     if self.difficulty == 'e':
                         self.difficulty = 'm'
