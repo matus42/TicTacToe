@@ -306,8 +306,8 @@ Throughout the development process, each feature underwent manual testing. This 
 
 ## Deployment and Development
 
-    * The project was developed using VS Code.
-    * The project is hosted on [GitHub](https://github.com/matus42/TicTacToe)
+* The project was developed using VS Code.
+* The project is hosted on [GitHub](https://github.com/matus42/TicTacToe)
 
 ### Deploying the App
 
@@ -360,6 +360,29 @@ To clone the repository through GitHub:
 *  IMPORTANT: If developing locally on your device, ensure set up/activate virtual enviroment before installing requirements.txt file.
 
 
+## Credits
+
+* The idea how to make computer moving [Stack Overflow](https://stackoverflow.com/questions/20920696/tic-tac-toe-computer-move)
+* For hosting my images [postimages.org](https://postimages.org/)
+* Background image was downloaded from [pixabay.com](https://pixabay.com/photos/tic-tac-toe-empty-fields-mystery-1954446/)
+* Got favicon from [icon8.com](https://icons8.com/icons/set/favicon)
+* I used [Lucid.app](https://lucid.app/documents#/documents?folder_id=home) to create flow chart.
+* I got ASCII art logo from [patorjk.com](https://patorjk.com/software/taag/#p=testall&h=2&v=1&f=Blocks&t=Type%20Something%20)
+* Code for clearing console from [delftstack.com](https://www.delftstack.com/howto/python/python-clear-console/)
+* To understand Tic Tac Toe logic credit to [geekflare.com](https://geekflare.com/tic-tac-toe-python-code/)
+* Code institute for the deployment terminal
+* How to add favicon, background picture i learned from my mentor [dnlbowers](https://github.com/dnlbowers/battleships/blob/main/views/layout.html)
+* function for delay printed text got from [programiz.com](https://www.programiz.com/python-programming/time/sleep)
+* got inspired byt this video starting at 35:40 by [freeCodeCamp.org](https://www.youtube.com/watch?v=8ext9G7xspg&t=3599s&ab_channel=freeCodeCamp.org)
+
+## Acknowledgements
+
+This site serves as my third portfolio project for the Full Stack Software Development course at Code Institute. I extend my heartfelt gratitude to everyone who provided unwavering support throughout its development. 
+
+* A heartfelt thanks to my mentor, David Bowers, for his invaluable guidance and inspiration.
+* I'm deeply grateful to the Code Institute community, encompassing both dedicated students and the supportive staff.
+* also big thank you to my fiance and two small kid to having patience with me during project
+* A special thank you to my fiancé and our two little ones for their patience and understanding throughout this project.
 
 
 
