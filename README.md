@@ -199,9 +199,8 @@ Testing was extensively conducted for this project. It's important to note that 
 |WelcomeScreen - Logo & Rules Display | Launch the game | The game's logo and rules are displayed correctly | Works as expected ** |
 |Valid Difficulty Selection| Enter: e, easy, m, medium, h, hard|App should accept and set the respective difficulty level|Works as expected|
 |Invalid Difficulty Selection|Enter invalid data other then e, easy, m, medium, h, hard|App informs user of invalid selection & prompts to choose a valid difficulty|Works as expected|
-|
 
-** On certain devices, the ASCII art displays irregularly. However, opening developer tools and reloading the page resolves the issue. I reached out to my tutor, who confirmed that it rendered correctly for them and indicated there was no problem.
+** On certain devices, the ASCII art does not display correctly. However, opening developer tools and reloading the page resolves the issue. I reached out to my tutor, who confirmed that it rendered correctly for them and indicated there was no problem.
 
 #### Game Play
 
@@ -214,7 +213,6 @@ Computer Move - Hard|Set computer to hard level and start the game|Computer make
 |Full Board Draw Condition|Fill all cells without getting three in a row|Game identifies the condition as a draw|Works as expected|
 |Occupied Spot Move|Attempt to play in an already occupied cell|App provides error message indicating spot is taken|Works as expected|
 |Invalid Move Input|Enter characters, numbers out of board's range|App informs user of invalid move & prompts to try again|Works as expected|
-|
 
 #### End of Game
 
@@ -225,14 +223,13 @@ Computer Move - Hard|Set computer to hard level and start the game|Computer make
 |Post-Session-Choices|After a game ends|Choices like continue, increase difficulty, and exit should be presented & work correctly|Works as expected|
 |hard difficulty Post-Session Choices|After a game ends in Hard Difficulty|Only options to continue or exit should be presented|Works as expected|
 |Prompt to Play Again|At the end of a session|Game should ask if player wants to play again and handle both valid and invalid inputs|Works as expected|
-|
 
 
 ### Python PEP8 Validation
 
 Based on my mentor's recommendation, I installed Flake8 into my vscode. After addressing numerous issues, primarily extra spaces and excessively long lines, I was able to correct all the errors.
 
-* pip install falke8
+* pip install flake8
 
 ![PEP8 Python Validator](docs/screenshots/linter.png)
 
@@ -267,7 +264,7 @@ Based on my mentor's recommendation, I installed Flake8 into my vscode. After ad
 
 Throughout the development process, each feature underwent manual testing. This led to the identification and resolution of several issues. As a result, all features are now functioning as outlined in the [features section](#features). A detailed account of the challenges faced during development is provided below.
 
-1. **Intended Outcome:** - Players expect the computer to block potential winning moves when its difficulty is set to 'hard'. 
+1. **Intended Outcome:** Players expect the computer to block potential winning moves when its difficulty is set to 'hard'. 
     * ***Issue Found:***
         * The computer does not block the player's winning moves consistently when set to 'hard' difficulty.
     * ***Causes:***
@@ -276,7 +273,7 @@ Throughout the development process, each feature underwent manual testing. This 
     * ***Solution Found***
         * I Modified the make_move function to prioritize checking for its own winning moves first (find_winning_move for 'O') only when on 'hard' difficulty, and then, if none are found, check for blocking moves to prevent the player from winning (find_blocking_move). 
 
-2. **Intended Outcome:** - After 2 games on 'easy' difficulty, the game should prompt the player to either increase difficulty or exit. If they choose to increase, the next games should be on the higher difficulty. 
+2. **Intended Outcome:** After 2 games on 'easy' difficulty, the game should prompt the player to either increase difficulty or exit. If they choose to increase, the next games should be on the higher difficulty. 
     * ***Issue Found:***
         * After selecting to increase the difficulty, the next games do not reflect the increased difficulty.
     * ***Causes:***
@@ -285,16 +282,16 @@ Throughout the development process, each feature underwent manual testing. This 
         * Initialization: When the difficulty is adjusted within the game loop, a fresh instantiation of the computer object is essential to reflect the new difficulty.
         * Implementation: After the player chooses to increase difficulty, the solution involves reinitializing the computer object with the new difficulty setting. This was done with the line: `computer = Computer(self.difficulty, self.check_winner)` 
 
-3. **Intended Outcome:** - After 2 games, when the player is prompted for a decision, the game screen should be cleared to provide a fresh view.
+3. **Intended Outcome:** After two games, when the player is prompted for a decision, the game screen should be cleared to provide a fresh view.
     * ***Issue Found:***
-        * The game's console display remains cluttered with previous game information when prompting the user after 2 games.
+        * The game's console display remains cluttered with previous game information when prompting the user after two games.
     * ***Causes:***
-        * There was no command to clear the console screen after the completion of 2 games and before prompting the user for their decision.
+        * There was no command to clear the console screen after the completion of two games and before prompting the user for their decision.
     * ***Solution Found***
-        * Implementation of Clearing Mechanism: Integrate the clearConsole() function into the game loop, specifically before displaying the score and prompting the user after the 2 games.
+        * Implementation of Clearing Mechanism: Integrate the clearConsole() function into the game loop, specifically before displaying the score and prompting the user after the two games.
         * Placement in Code: This was achieved by inserting the clearConsole() function call just before the score is displayed after two games are finished. By doing this, previous game data will be removed, presenting a clean slate to the user for their next action decision.               
 
-4. **Intended Outcome:** - Only the actual difficulty level input on the welcome screen should be displayed in cyan. After the first round, the "Difficulty Level" text should revert to white while the actual difficulty remains cyan. 
+4. **Intended Outcome:** Only the actual difficulty level input on the welcome screen should be displayed in cyan. After the first round, the "Difficulty Level" text should revert to white while the actual difficulty remains cyan. 
     * ***Issue Found:***
         * After the Welcome screen, both the "Difficulty Level" text and the actual difficulty are displayed in cyan. After the first round, the color for "Difficulty Level" switches back to default, but the intended behavior was for it never to be cyan in the first place.
     * ***Causes:***
@@ -333,7 +330,7 @@ The deployment of the project was done using [Heroku](https://www.heroku.com/) t
 13. Search for the GitHub repository name in the search bar.
 14. Click on "connect" to link the repository to Heroku.
 15. Scroll down and click on "Deploy Branch".
-16. Once the app is deployed, Heroku will notify you and provide a button to view the app.
+16. Once the app is deployed, Heroku will notify the user and provide a button to view the app.
 
 * If you wish to rebuild the deployed app automatically every time you push to GitHub, you may click on "Enable Automatic Deploys".
 
@@ -357,7 +354,7 @@ To clone the repository through GitHub:
 6. Type "git clone" and paste the URL that was copied from the repository.
 7. Press the "enter" key to create the clone.
 
-*  IMPORTANT: If developing locally on your device, ensure set up/activate virtual enviroment before installing requirements.txt file.
+*  IMPORTANT: If developing locally on your device, ensure you set up/activate virtual environment before installing requirements.txt file.
 
 
 ## Credits
@@ -380,11 +377,9 @@ To clone the repository through GitHub:
 This site serves as my third portfolio project for the Full Stack Software Development course at Code Institute. I extend my heartfelt gratitude to everyone who provided unwavering support throughout its development. 
 
 * A heartfelt thanks to my mentor, David Bowers, for his invaluable guidance and inspiration.
-* I'm deeply grateful to the Code Institute community, encompassing both dedicated students and the supportive staff.
-* also big thank you to my fiance and two small kid to having patience with me during project
+* I'm deeply grateful to the Code Institute community, which includes both dedicated students and the supportive staff.
+* Also, a big thank you to my fiance and two small kids for having patience with me during the project
 * A special thank you to my fiancé and our two little ones for their patience and understanding throughout this project.
 
-
-
-
-
+------------------
+Matus Gabris 2023

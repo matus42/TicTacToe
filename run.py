@@ -4,6 +4,7 @@ import os
 from colorama import init, Fore, Style
 import time
 
+# Initialize colorama with auto-resetting after each print
 init(autoreset=True)
 
 
