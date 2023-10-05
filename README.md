@@ -378,7 +378,6 @@ This site serves as my third portfolio project for the Full Stack Software Devel
 
 * A heartfelt thanks to my mentor, David Bowers, for his invaluable guidance and inspiration.
 * I'm deeply grateful to the Code Institute community, which includes both dedicated students and the supportive staff.
-* Also, a big thank you to my fiance and two small kids for having patience with me during the project
 * A special thank you to my fiancé and our two little ones for their patience and understanding throughout this project.
 
 ------------------
